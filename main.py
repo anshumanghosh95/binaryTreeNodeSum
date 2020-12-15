@@ -12,25 +12,20 @@ class CreateBinaryTree:
     def __init__(self, root):
         self.root = BinaryTree(root)
 
+        
+def BinaryTreeNodeDepthSum(root):
+    final = [0]
+    helper(root, 0, final)
+    return final[0]
 
-sum = [0]
-max_level = [-(2 ** 32)]
 
-
-def BinaryTreeNodeDepthSum(root, level):
-    if root is None:
+def helper(node, d, final):
+    if not node:
         return
+    final[0] += d
+    helper(node.left, d + 1, final)
+    helper(node.right, d + 1, final)
 
-    if level > max_level[0]:
-        sum[0] = root.data
-        max_level[0] = level
-
-    elif level == max_level[0]:
-        sum[0] = sum[0] + root.data
-
-    BinaryTreeNodeDepthSum(root.left, level + 1)
-    BinaryTreeNodeDepthSum(root.right, level + 1)
-    pass
 
 
 if __name__ == '__main__':
@@ -70,5 +65,4 @@ if __name__ == '__main__':
                     n[0].right = BinaryTree(int(node['right']))
                     nodelist.append((n[0].right, int(node['right'])))
 
-    BinaryTreeNodeDepthSum(binaryTree.root, 0)
-    print(sum[0])
+    print(BinaryTreeNodeDepthSum(binaryTree.root))

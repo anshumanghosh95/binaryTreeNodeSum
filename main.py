@@ -12,10 +12,10 @@ class CreateBinaryTree:
     def __init__(self, root):
         self.root = BinaryTree(root)
 
-        
+
 def BinaryTreeNodeDepthSum(root):
     final = [0]
-    helper(root, 0, final)
+    helper(root, 1, final)  # change here
     return final[0]
 
 
@@ -23,9 +23,8 @@ def helper(node, d, final):
     if not node:
         return
     final[0] += d
-    helper(node.left, d + 1, final)
-    helper(node.right, d + 1, final)
-
+    helper(node.left, d * 2, final)  # change here 
+    helper(node.right, d * 3, final)  # change here
 
 
 if __name__ == '__main__':
